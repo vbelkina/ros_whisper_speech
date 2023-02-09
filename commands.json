@@ -1,0 +1,100 @@
+{
+    "drive": 
+    {
+        "forward": 
+        {
+            "linear.x": 0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        },
+        "straight":
+        {
+            "linear.x": 0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        }, 
+        "back":
+        {
+            "linear.x": -0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        }
+    },  
+    "go": 
+    {
+        "forward": 
+        {
+            "linear.x": 0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        },
+        "straight":
+        {
+            "linear.x": 0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        }, 
+        "back":
+        {
+            "linear.x": -0.1,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0
+        }
+    }, 
+    "turn":
+    {
+        "left":
+        {
+            "linear.x": 0,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": -0.1
+          },
+          "right":
+          {
+            "linear.x": 0,
+            "linear.y": 0,
+            "linear.z": 0,
+            "angular.x": 0,
+            "angular.y": 0,
+            "angular.z": 0.1
+          }
+    }, 
+    "stop": 
+    {
+
+        "linear.x": 0,
+        "linear.y": 0,
+        "linear.z": 0,
+        "angular.x": 0,
+        "angular.y": 0,
+        "angular.z": 0
+    }, 
+    "exit program": "exit program"
+
+}
+
+
+
+  
+  
