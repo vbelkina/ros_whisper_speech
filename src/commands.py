@@ -4,7 +4,6 @@ import rospy
 import json 
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
-import signal
 
 rospy.init_node('commands')
 
@@ -13,6 +12,8 @@ class Commands():
     def __init__(self):
         self.command_sub = rospy.Subscriber("/command", String, self.command_cb) 
         self.cmd_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+        self.speak_pub = rospy.Publisher("/speak", String, queue_size=1)
+
         self.commands = []
 
         with open('/home/nika/catkin_ws/src/whisper/commands.json') as file:
@@ -29,6 +30,7 @@ class Commands():
         command_list = current_command.strip().split()
 
         if command_list[0] == "stop":
+            self.speak_pub.publish("stopping")
             rospy.loginfo("Executing {}".format(current_command))
             self.cmd_pub.publish(twist)
             
@@ -42,6 +44,7 @@ class Commands():
                 twist.angular.z = self.parsed_json[command_list[0]][command_list[1]]["angular.z"]
                 
                 rospy.loginfo("Executing {}".format(current_command))
+                self.speak_pub.publish("ok, will do.")
                 self.cmd_pub.publish(twist)
             else: 
                 rospy.logwarn("{} is not recognized".format(current_command))
