@@ -1,6 +1,6 @@
 # ros_whisper_speech
 
-Software Requirements: 
+## software requirements: 
 
 - python3
 - ROS noetic
@@ -14,11 +14,17 @@ Software Requirements:
 
 might need some packages for the sound system…
 
-to install package: 
+## to install package:
 
-git clone the repo in your catkin_ws/src
+in catkin_ws/src:
 
-run `catkin_make`
+`git clone https://github.com/vbelkina/ros_whisper_speech.git` 
+
+run: 
+
+`catkin_make`
+
+## errors
 
 Warnings that I'm getting and not sure how to fix, but the program works: 
 
