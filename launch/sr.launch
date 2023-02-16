@@ -1,5 +1,5 @@
 <launch>
-      <node name="commands" pkg="whisper" type="commands.py" />
-      <node name="text_to_speech" pkg="whisper" type="text_to_speech.py" />
-      <node name="whisper_sr" pkg="whisper" type="whisper_sr.py" />
+      <node name="commands" pkg="whisper" type="commands.py" output="screen"/>
+      <node name="text_to_speech" pkg="whisper" type="text_to_speech.py" output="screen"/>
+      <node name="wake" pkg="whisper" type="wake.py" output="screen"/>
 </launch>
