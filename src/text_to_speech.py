@@ -20,6 +20,7 @@ class text_to_speech():
         self.tld = 'com.au'
         self.text_sub = rospy.Subscriber("/speak", String, self.speak_cb) 
         self.exit_sub = rospy.Subscriber("/exit", Bool, self.exit_cb)
+        self.is_speaking = rospy.Publisher("/speaking", Bool, queue_size=1)
         self.node_name = "[TTS]"
         
     def speak_cb(self, msg):
@@ -28,12 +29,21 @@ class text_to_speech():
         """
         rospy.loginfo(f"{self.node_name} {msg}")
         text = msg.data
+
+        # eventually check if there is internet connection
+        self.google(text)
+
+    def google(self, text):
         speech = gTTS(text= text, lang=self.language, tld=self.tld, slow=False)
          # Saving the converted audio in a mp3 file named
         speech.save("speak.mp3")
         
+        self.is_speaking.publish(True)
+
         # Playing the converted file
         os.system("mpg123 -q speak.mp3")
+
+        self.is_speaking.publish(False)
     
     def exit_cb(self, msg):
         if msg.data:

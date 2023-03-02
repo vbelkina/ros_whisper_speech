@@ -24,6 +24,8 @@ class Commands():
         self.exit_sub = rospy.Subscriber("/exit", Bool, self.exit_cb)
 
         self.node_name = "[COMMANDS]"
+        self.executing = f"{self.node_name} Executing: "
+        self.not_recognized = f"{self.node_name} sorry, I didn't recognize the command "
 
         self.commands = []
 
@@ -42,10 +44,10 @@ class Commands():
 
         if command_list[0] == "stop":
             self.speak_pub.publish("stopping")
-            rospy.loginfo("{self.node_name} Executing {}".format(current_command))
+            rospy.loginfo(f"{self.executing}{current_command}")
             self.cmd_pub.publish(twist)
         elif command_list[0] == "exit":
-            self.exit_sub.publish(True)
+            self.exit_pub.publish(True)
         elif command_list[0] in self.parsed_json: 
             if command_list[1] in self.parsed_json[command_list[0]]:
                 twist.linear.x = self.parsed_json[command_list[0]][command_list[1]]["linear.x"]
@@ -55,22 +57,22 @@ class Commands():
                 twist.angular.y = self.parsed_json[command_list[0]][command_list[1]]["angular.y"]
                 twist.angular.z = self.parsed_json[command_list[0]][command_list[1]]["angular.z"]
                 
-                rospy.loginfo("{self.node_name} Executing {}".format(current_command))
+                rospy.loginfo(f"{self.executing} {current_command}")
                 self.speak_pub.publish("ok, will do.")
                 self.cmd_pub.publish(twist)
             else: 
-                self.speak_pub.publish("{self.node_name} sorry, I didn't recognize the command.")
-                rospy.logwarn("{self.node_name} {} is not recognized".format(current_command))
+                self.speak_pub.publish("{self.not_recognized} {current_command}")
+                rospy.logwarn(f"{self.not_recognized} {current_command}")
         else: 
-            self.speak_pub.publish("sorry, I didn't recognize the command.")
-            rospy.logwarn("{self.node_name} {} not recognized".format(current_command))
+            self.speak_pub.publish("{self.not_recognized} {current_command}")
+            rospy.logwarn(f"{self.not_recognized} {current_command}")
 
     def command_cb(self, msg):
         """
         received String messages that will give commands to the robot
         """
         
-        rospy.loginfo("{self.node_name} Command {} received".format(msg.data))
+        rospy.loginfo(f"{self.node_name} Command {msg.data} received")
         if msg.data != "": 
             self.commands.append(msg.data)
 

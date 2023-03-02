@@ -4,6 +4,7 @@ basic Exit class which will close the open nodes that are subscribed to the exit
 
 import rospy
 from std_msgs.msg import String
+import sys
 
 class Exit():
 
@@ -16,3 +17,7 @@ class Exit():
         """
         rospy.loginfo(f"{node_name} shutting down...")
         rospy.signal_shutdown("Stop")
+
+    def shutdown(sig, stackframe):
+        rospy.loginfo('Exit because of ^c')
+        sys.exit(0)
