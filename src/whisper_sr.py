@@ -45,7 +45,7 @@ class WSR():
         self.speak_pub.publish("listening for a command...")
         if not self.is_speaking: 
           rospy.loginfo(f"{self.node_name} time passed: {(rospy.Time.now().to_sec() - time_since)}")
-          with sr.Microphone() as source:  
+          with sr.Microphone(1) as source:  
                 audio = self.r.listen(source, phrase_time_limit=5, timeout=5)
 
           try:  
