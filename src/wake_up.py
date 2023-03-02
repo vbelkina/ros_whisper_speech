@@ -50,7 +50,7 @@ class WakeUp():
         """
         if not self.is_speaking:
             rospy.loginfo(f"{self.node_name} listening for wake word: hello robot")
-            with sr.Microphone() as source:
+            with sr.Microphone(1) as source:
                 audio = self.r.listen(source, phrase_time_limit=3, timeout=3) 
                 # rospy.loginfo(f"{self.node_name} microphone device index: {self.device_index}")  
             
